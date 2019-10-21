@@ -30,3 +30,11 @@ Route::delete('blog/comment/{blog}/{comment}', 'BlogController@deleteComment');
 
 
 Route::resource('library', 'LibraryController');
+
+Route::post('library/author/{book}', 'LibraryController@addAuthor');
+
+Route::get('library/author/{author}', 'LibraryController@showAuthor');
+
+Route::put('library/author/{author}', 'LibraryController@updateAuthor');
+
+Route::delete('library/author/{author}', 'LibraryController@deleteAuthor');

@@ -114,4 +114,42 @@ class LibraryController extends Controller
         return response()->json(['success' => "Book deleted with success"]);
 
     }
+
+    public function  addAuthor(Request $request, $id)
+    {
+
+        $book = $this->book->find($id);
+
+        $author = $book->authors()->create($request->all());
+
+        return response()->json(['success' => "Author added  with success"]);
+    }
+
+
+    public function showAuthor($id)
+    {
+        $author = $this->author->find($id);
+
+        return response()->json($author);
+    }
+
+    public function updateAuthor(Request $request, $id)
+    {
+          $author = $this->author->find($id);
+
+          $author->update($request->all());
+
+          return response()->json(['success' => 'Author updated with success']);
+
+    }
+
+    public function deleteAuthor($id)
+    {
+       $author =  $this->author->find($id);
+
+       $author->delete();
+
+       return response()->json(['success' => 'Author deleted  with success']);
+
+    }
 }
