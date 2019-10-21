@@ -15,6 +15,8 @@ class BlogController extends Controller
     public function __construct(Post $post)
     {
         $this->post = $post;
+
+        
     }
 
 

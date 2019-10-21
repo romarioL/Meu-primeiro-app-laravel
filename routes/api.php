@@ -27,3 +27,6 @@ Route::get('blog/comment/{blog}', 'BlogController@showComment');
 Route::put('blog/comment/{blog}/{comment}', 'BlogController@updateComment');
 
 Route::delete('blog/comment/{blog}/{comment}', 'BlogController@deleteComment');
+
+
+Route::resource('library', 'LibraryController');

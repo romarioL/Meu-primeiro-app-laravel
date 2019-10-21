@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Author;
+
+use App\Book;
+
 class LibraryController extends Controller
 {
     /**
@@ -11,9 +15,25 @@ class LibraryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $author;
+
+    protected $book;
+
+    public function __construct(Author $author, Book $book)
+    {
+           $this->author = $author;
+
+           $this->book = $book;    
+    }
+
+
     public function index()
     {
-        //
+
+     $author=   $this->author->find(1)->books()->get();
+
+         return response()->json($author);
     }
 
     /**
@@ -34,7 +54,9 @@ class LibraryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $book = $this->book->create($request->all());
+
+        return response()->json(["success" => "Book registered with success"]);
     }
 
     /**
@@ -68,7 +90,13 @@ class LibraryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $book =  $this->book->find($id);
+
+       $book->update($request->all());
+
+       return response()->json(['success' => "Book  updated  with success"]);
+
+
     }
 
     /**
@@ -79,6 +107,11 @@ class LibraryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $book = $this->book->find($id);
+
+        $book->delete();
+
+        return response()->json(['success' => "Book deleted with success"]);
+
     }
 }
