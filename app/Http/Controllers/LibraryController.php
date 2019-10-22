@@ -8,6 +8,8 @@ use App\Author;
 
 use App\Book;
 
+
+
 class LibraryController extends Controller
 {
     /**
@@ -31,9 +33,34 @@ class LibraryController extends Controller
     public function index()
     {
 
-     $author=   $this->author->find(1)->books()->get();
+         $authors  = $this->author->get();
 
-         return response()->json($author);
+
+         $books= [];
+
+
+         $i = 0;
+
+
+         foreach($authors as $author)
+        {
+
+            $id =  $author->id;
+
+            $books_query = $this->author->find($id)->books()->get();
+
+
+
+            $books[$i] = ["author" => $this->author->find($id), "books" => $books_query];
+
+
+            $i++;
+
+
+        }
+
+
+         return response()->json($books);
     }
 
     /**
